@@ -9,8 +9,14 @@ public class ProductList {
         }
         products.add(product);
     }
+
+
     public void removeProduct(Product product){
         products.remove(product);
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
