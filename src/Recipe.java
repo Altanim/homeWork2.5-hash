@@ -1,17 +1,35 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Recipe {
     private String name;
-    private double summCost;
-    private ProductList productList;
-    public Recipe(String name, double summCost, ProductList productList) {
-        this.name = name;
-        this.summCost = summCost;
-        this.productList = productList;
-    }
+    private int summCost;
+    private final Map<Product, Integer> products;
+    private int amount;
 
+    public Recipe(String name) {
+        this.name = name;
+        this.summCost = 0;
+        this.products = new HashMap<Product, Integer>();
+    }
+    public void addRecipe(Product product, int amount){
+        if (products.containsKey(product)){
+            throw new ProductExistExeption("Продукт уже добавлен");
+        }
+        if (amount <= 0){
+            this.amount = 1;
+        } else {
+            this.amount = amount;
+        }
+        this.products.put(product, amount);
+        this.summCost += amount * product.getPrice();
+    }
+    public void printRecipe(){
+        System.out.println(name);
+        for (Map.Entry<Product, Integer> entry : products.entrySet()){
+            System.out.println(entry.getKey() + ", amount: " + entry.getValue() + "pcs.");
+        }
+        System.out.println("total price: " + summCost + "r.");
+    }
     public String getName() {
         return name;
     }
@@ -20,20 +38,12 @@ public class Recipe {
         this.name = name;
     }
 
-    public double getSummCost() {
+    public int getSummCost() {
         return summCost;
     }
 
-    public void setSummCost(double summCost) {
-        this.summCost = summCost;
-    }
-
-    public ProductList getProductList() {
-        return productList;
-    }
-
-    public void setProductList(ProductList productList) {
-        this.productList = productList;
+    public Map<Product, Integer> getProducts() {
+        return products;
     }
 
     @Override
@@ -51,8 +61,7 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe " + name + '\'' +
-                ", Cost " + summCost +
-                "\nproductList" + productList + "" + "\n";
+        return "Recipe " + name +
+                ", products " + products;
     }
 }

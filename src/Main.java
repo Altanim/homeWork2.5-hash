@@ -1,59 +1,61 @@
-import java.util.*;
-
-import static java.util.Arrays.*;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("Задание 1");
 
-        Product apple = new Product("Apple", 0.3, 1.5);
-        Product honey = new Product("Honey", 0.1, 4);
-        Product grape = new Product("Grape", 0.3, 2.3);
-        Product fish = new Product("Fish", 1, 5.4);
-        Product oil = new Product("Oil", 0.5, 2.6);
-        Product carrot = new Product("Carrot", 0.2, 0.8);
-        Product garlic = new Product("Garlic", 0.05, 0.2);
-        Product onion = new Product("Onion", 0.3, 1.1);
-        Product potato = new Product("Potato", 3, 6);
+        Product apple = new Product("Apple", 1, 150);
+        Product honey = new Product("Honey", 1, 400);
+        Product grape = new Product("Grape", 1, 230);
+        Product fish = new Product("Fish", 1, 540);
+        Product oil = new Product("Oil", 1, 260);
+        Product carrot = new Product("Carrot", 1, 80);
+        Product garlic = new Product("Garlic", 1, 20);
+        Product onion = new Product("Onion", 1, 10);
+        Product potato = new Product("Potato", 1, 60);
 
+        ProductList fryFish = new ProductList();
 
-        ProductList productList = new ProductList();
-        productList.addProduct(fish);
-        productList.addProduct(oil);
-        productList.addProduct(carrot);
-        productList.addProduct(garlic);
-        System.out.println(productList);
+        fryFish.addProduct(fish,2);
+        fryFish.addProduct(oil,1);
+        fryFish.addProduct(garlic,3);
+        fryFish.addProduct(carrot,2);
+        fryFish.print();
 
-        Recipe friedFish = new Recipe("Fried fish", 10.2, productList);
-        Recipe honeyApple = new Recipe("Honey apple", 5.5, productList);
-
-        RecipeList recipeList = new RecipeList();
-        recipeList.addRecipe(honeyApple);
-        recipeList.addRecipe(friedFish);
         System.out.println();
-        System.out.println(recipeList);
 
+        Recipe carrotFish = new Recipe("Fish with carrot");
+        carrotFish.addRecipe(fish, 2);
+        carrotFish.addRecipe(carrot, 2);
+        carrotFish.addRecipe(oil, 1);
+        carrotFish.addRecipe(garlic,1);
+        carrotFish.printRecipe();
 
-        System.out.println("Задание 2");
+        System.out.println();
 
-        Random random = new Random();
-        Set<Integer> nums = new HashSet<>();
-        while (nums.size() < 20) {
-            nums.add(random.nextInt(1000));
-        }
-        System.out.println(nums);
-        Iterator<Integer> iterator = nums.iterator();
-        while (iterator.hasNext()){
-            Integer number = iterator.next();
-            if (number%2==1){
-                iterator.remove();
-            }
-        }
-        System.out.println(nums);
+        Recipe honeyApple = new Recipe("Honey apple");
+        honeyApple.addRecipe(honey,1);
+        honeyApple.addRecipe(apple, 3);
+        honeyApple.printRecipe();
+
+//        System.out.println("Задание 2");
+//
+//        Random random = new Random();
+//        Set<Integer> nums = new HashSet<>();
+//        while (nums.size() < 20) {
+//            nums.add(random.nextInt(1000));
+//        }
+//        System.out.println(nums);
+//        Iterator<Integer> iterator = nums.iterator();
+//        while (iterator.hasNext()){
+//            Integer number = iterator.next();
+//            if (number%2==1){
+//                iterator.remove();
+//            }
+//        }
+//        System.out.println(nums);
 
         // HashMap Задание №1
 
-        HashMap phoneBook = new HashMap();
+        PhoneBook phoneBook = new PhoneBook();
         phoneBook.add("Антоненко Сергей Станиславович", "+79814754739");
         phoneBook.add("Кузьмина Ольга Семеновна", "+79238544573");
         phoneBook.add("Сотникова Наталья Александровна", "+73494982458");
@@ -74,7 +76,7 @@ public class Main {
         phoneBook.add("Вербилова Светлана Николаевна", "+79858458383");
         phoneBook.add("Ягина Анна Сергеевна", "+73948575474");
         phoneBook.add("Литвиненко Никита Петрович", "+79814958575");
-        phoneBook.print();
+        phoneBook.printPhone();
         }
 
     }

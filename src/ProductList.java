@@ -1,26 +1,29 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductList {
-    private Set<Product> products = new HashSet<>();
-    public void addProduct(Product product){
-        if (products.contains(product)){
+    private final Map<Product, Integer> products = new HashMap<>();
+    public void addProduct(Product product, int weight){
+        if (products.containsKey(product)){
             throw new ProductExistExeption("Продукт уже добавлен");
         }
-        products.add(product);
+        products.put(product, weight);
     }
-
+    public void add(Product product){
+        add(product);
+    }
+    public void print(){
+        for (Map.Entry<Product, Integer> entry : products.entrySet()){
+            System.out.println("Product: " + entry.getKey() + ", amount: " + entry.getValue() + "pcs");
+        }
+    }
 
     public void removeProduct(Product product){
         products.remove(product);
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
     @Override
     public String toString() {
-        return "" + products;
+        return "Product list: " + products;
     }
 }

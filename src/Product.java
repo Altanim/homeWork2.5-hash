@@ -1,29 +1,23 @@
 import java.util.Objects;
 
-public class Product {
+public class Product extends ProductList {
     private String name;
-    private double weight;
-    private double price;
+    private int weight;
+    private int price;
 
-    public Product(String name, double weight, double price) {
-        if (name == null || name.isEmpty() || name.isBlank()) {
-            throw new EmptyProductExeption("Продукт не заполнен.");
+    public Product(String name, int weight, int price) {
+      setName(name);
+      setWeight(weight);
+      setPrice(price);
+    }
+
+
+    public String getName() {
+        if (name == null || name.isBlank() || name.isEmpty() ){
+            throw new ProductExistExeption("Продукт не заполнен");
         } else {
             this.name = name;
         }
-        if (weight == 0) {
-            throw new EmptyProductExeption("Продукт не заполнен.");
-        } else {
-            this.weight = weight;
-        }
-        if (price == 0) {
-            throw new EmptyProductExeption("Продукт не заполнен.");
-        } else {
-            this.price = price;
-        }
-    }
-
-    public String getName() {
         return name;
     }
 
@@ -31,19 +25,29 @@ public class Product {
         this.name = name;
     }
 
-    public double getWeight() {
+    public int getWeight() {
+        if (weight == 0) {
+            throw new EmptyProductExeption("Продукт не заполнен.");
+        } else {
+            this.weight = weight;
+        }
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public double getPrice() {
+    public int getPrice() {
+        if (price == 0) {
+            throw new EmptyProductExeption("Продукт не заполнен.");
+        } else {
+            this.price = price;
+        }
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -56,15 +60,19 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Product product = (Product) o;
-        return Objects.equals(getName(), product.getName());
+        return Objects.equals(name, product.name);
     }
 
     @Override
     public String toString() {
-        return "\nProduct " + name + ", weight " + weight +
-                "kg, price " + price + "$";
+        return name +
+                ", price " + price + "r.";
     }
 }
